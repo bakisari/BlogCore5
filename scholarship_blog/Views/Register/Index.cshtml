@@ -1,0 +1,105 @@
+﻿@model EntityLayer.Concrete.Writer
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<!--
+    Author: W3layouts
+    Author URL: http://w3layouts.com
+    License: Creative Commons Attribution 3.0 Unported
+    License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!--/main-->
+<section class="main-content-w3layouts-agileits">
+    <div class="container">
+        <h3 class="tittle">Kayıt Ol</h3>
+        <div class="inner-sec">
+            <div class="login p-5 bg-light mx-auto mw-100">
+                <span asp-validation-for="WriterPassword" />
+                <form asp-action="Index" asp-controller="Register" method="post">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            
+                            @if (ViewBag.notification != null)
+                            {
+                                <script>
+                                    swal("Tebrikler!", "Başarıyla Kayıt Oldunuz ", "success");
+                                </script>
+                              
+
+                            }
+
+                            <label for="validationCustom01">Adınız Soyadınız</label>
+
+
+                            <input type="text" class="form-control" asp-for="WriterName" id="validationDefault01" placeholder="" required="">
+                            <span asp-validation-for="WriterName"
+                                  class="text-danger"></span>
+
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">E-Posta</label>
+                            <input type="text" class="form-control" asp-for="WriterMail" id="validationDefault02" placeholder="" required="">
+                            <span asp-validation-for="WriterMail" class="text-danger"></span>
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputPassword1 mb-2">Şifre</label>
+                            <input type="password" asp-for="WriterPassword" class="form-control" id="password1" placeholder="" required="">
+                            <span asp-validation-for="WriterPassword" class="text-danger"></span>
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputPassword2 mb-2">Şifreyi Onayla</label>
+                            <input type="password" class="form-control" id="password2" placeholder="" required="">
+                            <span asp-validation-for="WriterPassword" class="text-danger"></span>
+
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Resim Dosya Yolu</label>
+                            <input type="text" class="form-control" asp-for="WriterImage" id="validationDefault02" placeholder="" required="">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary submit mb-4">Kayıt Ol</button>
+                    <br />
+                    <a href="#" id="bt"> Gizlilik Sözleşmesini Kabul Ediyorum.</a>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+<!--//main-->
+<!-- js -->
+<script src="~/web/js/jquery-2.2.3.min.js"></script>
+<!-- //js -->
+<!-- password-script -->
+<script>
+    window.onload = function () {
+        document.getElementById("password1").onchange = validatePassword;
+        document.getElementById("password2").onchange = validatePassword;
+    }
+
+    function validatePassword() {
+        var pass2 = document.getElementById("password2").value;
+        var pass1 = document.getElementById("password1").value;
+        if (pass1 != pass2)
+            document.getElementById("password2").setCustomValidity("Şifreler Uyuşmuyor");
+        else
+            document.getElementById("password2").setCustomValidity('');
+        //empty string means no validation error
+    }
+
+    $('#bt').click(function () {
+        swal("Gizlilik Sözleşmesi", "1. Bu sözleşme çerçevesinde, Gizli Bilgiyi Veren tarafından Gizli Bilgiyi Alan’a vermeyecektir..");
+
+    });
+
+</script>
+<!-- //password-script -->

@@ -1,0 +1,11 @@
+﻿<div class="comment-top">
+    <h4>Bir Yorum Bırak</h4>
+    <div class="comment-bottom">
+        <form asp-action="PartialAddComment" asp-controller="Comment" method="post">
+            <input class="form-control" type="text" name="WriterID" placeholder="Yazar Id" required="">
+
+            <textarea class="form-control" name="CommentContent" placeholder="Yorumunuz..." required=""></textarea>
+            <button type="submit" class="btn btn-primary submit">Paylaş</button>
+        </form>
+    </div>
+</div>

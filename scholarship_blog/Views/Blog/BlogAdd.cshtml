@@ -1,0 +1,69 @@
+﻿@model EntityLayer.Concrete.Blog
+@{
+    ViewData["Title"] = "BlogAdd";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Yeni Blog Ekle</h4>
+
+            <form class="forms-sample" asp-action="BlogAdd" asp-controller="Blog" method="post">
+                <div class="form-group">
+                    <label for="exampleInputName1">Başlık</label>
+                    <input type="text" class="form-control" name="BlogTitle" id="exampleInputName1" placeholder="Blog Başlığı">
+                    <span asp-validation-for="BlogTitle" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="exampleSelectGender">Kategori</label>
+                    <select asp-for="CategoryID" asp-items="@ViewBag.categoryvalues" class="form-control" name="CategoryID">
+                        <option>~ Kategori Seçiniz ~</option>
+                    </select>
+                    <span class="text-danger">@ViewBag.message</span>
+
+                </div>
+                <div class="form-group">
+                    <label>Blog Görseli</label>
+                    <input type="file" name="img[]" class="file-upload-default">
+                    <div class="input-group col-xs-12">
+                        <input type="text" class="form-control file-upload-info" disabled placeholder="">
+                        <span class="input-group-append">
+                            <button class="file-upload-browse btn btn-gradient-primary" type="button">Dosya Seç</button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleTextarea1">İçerik</label>
+                    <textarea class="form-control" id="summernote" name="BlogContent" rows="6"></textarea>
+                    <span asp-validation-for="BlogContent" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-gradient-primary mr-2">Yayınla</button>
+                <button class="btn btn-light">İptal Et</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $('#summernote').summernote({
+        placeholder: 'Buraya içeriğinizi yazın',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+    });
+</script>

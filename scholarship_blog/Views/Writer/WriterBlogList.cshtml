@@ -1,0 +1,69 @@
+﻿@model List<Blog>
+@{
+    ViewData["Title"] = "WriterBlogList";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Bloglarım</h4>
+            @if (TempData["values"] != null)
+            {
+                <script>
+                                    swal("Tebrikler!", "Yönetici Onayından Sonra Bloğunuz Yayına Alınacaktır ", "success");
+                </script>
+
+
+            }
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th> #  </th>
+                        <th> Resim </th>
+                        <th> Blog Başlığı </th>
+                        <th> Oluşturma Tarihi </th>
+                        <th> Kategori</th>
+                        <th> Durum </th>
+                        <th>Güncelle</th>
+                        <th>Sil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in Model)
+                    {
+                        <tr>
+                            <td>  @x.BlogID</td>
+                            <td class="py-1">
+                                <img src="@x.BlogImage" alt="image" />
+                            </td>
+                            <th> @x.BlogTitle</th>
+
+                            <td> @(((DateTime)x.BlogCreateDate).ToString("dd-MMM-yyyy")) </td>
+                            <td> @x.Category.CategoryName </td>
+                            @if (x.BlogStatus == true)
+                            {
+
+                                <td><label class="badge badge-success">Onaylandı</label></td>
+
+
+                            }
+                            @if (x.BlogStatus == false)
+                            {
+                                <td><label class="badge badge-danger">Onay Bekliyor</label></td>
+                            }
+                            <td><a href="/Blog/UpdateBlog/@x.BlogID" class="btn btn-outline-secondary btn-sm">Güncelle</a></td>
+                            <td><a href="/Blog/BlogDeleted/@x.BlogID" id="btnDelete" class="btn btn-outline-secondary btn-sm">Sil</a></td>
+                        </tr>
+
+                    }
+
+
+                </tbody>
+            </table>
+            <a href="/Blog/BlogAdd" class="btn btn-gradient-primary btn-rounded btn-fw">Yeni Blog Oluştur</a>
+
+        </div>
+    </div>
+</div>
+
+
